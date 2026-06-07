@@ -1,0 +1,20 @@
+# custom: ester_hbond 2
+
+! UKS B3LYP ZORA def2-TZVP SARC/J TightSCF
+! Normalprint Opt CPCMC(water)
+
+# https://sites.google.com/site/orcainputlibrary/geometry-optimizations
+%geom Scan
+B 20 21 = 2.8, 4.2, 15
+end
+end
+
+%pal
+        nprocs 16
+end
+
+%scf
+        MaxIter 500
+end
+
+* xyzfile 0 1 guess.xyz

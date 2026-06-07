@@ -1,0 +1,16 @@
+# ethyloxonium (ethanol.+]) | performed from geometry optimization
+
+! B3LYP ZORA ma-ZORA-def2-TZVP SARC/J TightSCF SlowConv  MORead
+! LargePrint Freq CPCMC(water)
+
+%pal
+        nprocs 16
+end
+
+%moinp "Opt.gbw"        # Read scratch from previous Opt results
+
+%scf
+        MaxIter 500
+end
+
+* xyzfile 1 1 Opt.xyz

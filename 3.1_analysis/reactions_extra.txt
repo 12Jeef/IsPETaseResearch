@@ -1,0 +1,17 @@
+cmplx_a_alt1
+ethyl_benzoate(+)   + water       -> benzoic_acid(+)  + ethanol
+
+cmplx_a_alt2
+ethyl_benzoate(+)   + water       -> benzoic_acid     + ethanol(+)
+
+cmplx_b_alt1
+ethyl_benzoate      + water(-)    -> benzoic_acid     + ethanol(-)
+
+simp_a_alt1
+ethyl_acetate(+)    + water       -> acetic_acid(+)   + ethanol
+
+simp_a_alt2
+ethyl_acetate(+)    + water       -> acetic_acid      + ethanol(+)
+
+simp_b_alt1
+ethyl_acetate       + water(-)    -> acetic_acid      + ethanol(-)

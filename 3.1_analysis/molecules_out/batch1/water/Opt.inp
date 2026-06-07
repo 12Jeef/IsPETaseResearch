@@ -1,0 +1,20 @@
+# water (water.]) | 
+
+! UKS B3LYP ZORA def2-TZVP SARC/J TightSCF
+! Normalprint Opt CPCMC(water)
+
+%pal
+        nprocs 16
+end
+
+%scf
+        MaxIter 500
+end
+
+%geom
+Constraints
+
+end
+end
+
+* xyzfile 0 1 guess.xyz

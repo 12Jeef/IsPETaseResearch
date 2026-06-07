@@ -1,0 +1,44 @@
+#!/usr/bin/python3
+
+import sys
+import os
+import subprocess
+
+args = sys.argv[1:]
+
+run_opt = "ropt" in args
+run_freq = "rfreq" in args
+
+cwd = os.getcwd()
+
+def search_dir(path):
+  if not os.path.isdir(path):
+    return
+  
+  if run_opt:
+    opt_path = os.path.join(path, "Opt.inp")
+    opt_out_path = os.path.join(path, "Opt.out")
+    if os.path.exists(opt_path):
+      if os.path.isfile(opt_path):
+        if not os.path.exists(opt_out_path):
+          print(f"OPT: Starting {os.path.basename(path)}...")
+          subprocess.run(["sbatch", "qOpt"], cwd=path)
+        else:
+          print(f"OPT: Skipping {os.path.basename(path)}: output Opt.out already exists")
+    
+  if run_freq:
+    freq_path = os.path.join(path, "Freq.inp")
+    freq_out_path = os.path.join(path, "Freq.out")
+    if os.path.exists(freq_path):
+      if os.path.isfile(freq_path):
+        if not os.path.exists(freq_out_path):
+          print(f"FREQ: Starting {os.path.basename(path)}...")
+          subprocess.run(["sbatch", "qFreq"], cwd=path)
+        else:
+          print(f"FREQ: Skipping {os.path.basename(path)}: output already exists")
+  
+  for name in os.listdir(path):
+    search_dir(os.path.join(path, name))
+
+if run_opt or run_freq:
+  search_dir(cwd)

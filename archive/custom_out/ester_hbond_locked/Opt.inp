@@ -1,0 +1,20 @@
+# ester_hbond_locked
+
+! UKS B3LYP ZORA def2-TZVP SARC/J TightSCF
+! Normalprint Opt CPCMC(water)
+
+%pal
+        nprocs 16
+end
+
+%scf
+        MaxIter 500
+end
+
+%geom
+Constraints
+{B 20 21 3.5 C}
+end
+end
+
+* xyzfile 0 1 guess.xyz

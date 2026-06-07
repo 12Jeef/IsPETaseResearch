@@ -1,0 +1,17 @@
+.vscode
+.DS_Store
+
+__pycache__
+
+*.out
+*.gbw
+*.cpcm
+*.opt
+*.densities
+*.hess
+*.dat
+Freq_property.txt
+Opt_property.txt
+Opt.engrad
+*.csv
+*.zip

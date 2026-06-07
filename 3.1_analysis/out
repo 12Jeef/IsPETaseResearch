@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm ./molecules_out/**/*.tmp
+rm ./data/reaction_*_energies.csv
+
+python3 out_parse.py --mols ./molecules_in/ --data ./molecules_out/ --out ./data/energies.csv
+python3 out_parse2.py --mols ./molecules_in/ --rxns ./reactions.txt --energies ./data/energies.csv --out ./data/
+
+rm -rf ../**/__pycache__

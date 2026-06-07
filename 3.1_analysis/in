@@ -1,0 +1,5 @@
+#!/bin/bash
+
+python3 in_gen_inp.py --mols ./molecules_in/
+
+rm -rf ../**/__pycache__

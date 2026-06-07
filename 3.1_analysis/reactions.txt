@@ -1,0 +1,68 @@
+# complex reactions with acid/base variations
+
+cmplx_n: Complex Neutral
+ethyl_benzoate      + water       -> benzoic_acid     + ethanol
+
+cmplx_a: Complex Acidic
+ethyl_benzoate(+)   + 2 water     -> benzoic_acid     + ethanol     + water(+)
+
+cmplx_b: Complex Basic
+ethyl_benzoate      + water(-)    -> benzoic_acid(-)  + ethanol
+
+cmplx_a+b: Complex Acidic+Basic
+ethyl_benzoate(+)   + water(-)    -> benzoic_acid     + ethanol
+
+# simple reactions with acid/base variations
+
+simp_n: Simple Neutral
+ethyl_acetate       + water       -> acetic_acid      + ethanol
+
+simp_a: Simple Acidic
+ethyl_acetate(+)    + 2 water     -> acetic_acid      + ethanol     + water(+)
+
+simp_b: Simple Basic
+ethyl_acetate       + water(-)    -> acetic_acid(-)   + ethanol
+
+simp_a+b: Simple Acidic+Basic
+ethyl_acetate(+)    + water(-)    -> acetic_acid      + ethanol
+
+# asp vs glu
+
+asp_s: Aspartic Acid Proton Relay Simple
+acetic_acid         + water(-)    -> acetic_acid(-)   + water
+
+asp_c: Aspartic Acid Proton Relay Complex
+aspartic_acid(+)    + water(-)    -> aspartic_acid    + water
+
+asp2glu_s: Glutamic Acid Proton Relay Simple
+propionic_acid      + water(-)    -> propionic_acid(-) + water
+
+asp2glu_c: Glutamic Acid Proton Relay Complex
+glutamic_acid(+)    + water(-)    -> glutamic_acid    + water
+
+# ser vs thr
+
+ser: Serine
+ethanol(-)          + water       -> ethanol          + water(-)
+
+ser2thr: Serine to Threonine
+threonine_chunk(-)  + water       -> threonine_chunk  + water(-)
+
+# amino ionizations
+arg: Arganine Ionization
+arganine            + water       -> arganine(-)      + water(+)
+
+asn: Asparagine Ionization
+asparagine          + water       -> asparagine(-)    + water(+)
+
+cys: Cystine Ionization
+cystine             + water       -> cystine(-)       + water(+)
+
+met: Methionine Ionization
+methionine          + water       -> methionine(-)    + water(+)
+
+pro: Proline Ionization
+proline             + water       -> proline(-)       + water(+)
+
+tyr: Tyrosine Ionization
+tyrosine            + water       -> tyrosine(-)      + water(+)
