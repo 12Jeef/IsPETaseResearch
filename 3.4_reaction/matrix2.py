@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import heapq
 
@@ -7,6 +8,9 @@ import numpy as np
 
 
 root = os.path.dirname(os.path.abspath(__file__))
+
+
+do_path = "-p" in sys.argv
 
 
 def scenario(wd):
@@ -182,53 +186,54 @@ def plot_matrix(result, title="Heatmap", file_path=None, show_plot=True):
     plt.xlabel(f"distance (Å) atoms {bond_x[0]}-{bond_x[1]}")
     plt.ylabel(f"distance (Å) atoms {bond_y[0]}-{bond_y[1]}")
 
-    # Highlight local minima (including edges)
-    minima = []
-    for i in range(Es.shape[0]):
-        for j in range(Es.shape[1]):
-            if not np.isnan(Es[i, j]) and Es[i, j] < 70:
-                neighbors = []
-                for di in [-1, 0, 1]:
-                    for dj in [-1, 0, 1]:
-                        if di == 0 and dj == 0:
+    if do_path:
+        # Highlight local minima (including edges)
+        minima = []
+        for i in range(Es.shape[0]):
+            for j in range(Es.shape[1]):
+                if not np.isnan(Es[i, j]) and Es[i, j] < 70:
+                    neighbors = []
+                    for di in [-1, 0, 1]:
+                        for dj in [-1, 0, 1]:
+                            if di == 0 and dj == 0:
+                                continue
+                            ni, nj = i + di, j + dj
+                            if 0 <= ni < Es.shape[0] and 0 <= nj < Es.shape[1]:
+                                neighbors.append(Es[ni, nj])
+                    if all(Es[i, j] <= n for n in neighbors if not np.isnan(n)):
+                        if all(np.isnan(n) for n in neighbors):
                             continue
-                        ni, nj = i + di, j + dj
-                        if 0 <= ni < Es.shape[0] and 0 <= nj < Es.shape[1]:
-                            neighbors.append(Es[ni, nj])
-                if all(Es[i, j] <= n for n in neighbors if not np.isnan(n)):
-                    if all(np.isnan(n) for n in neighbors):
-                        continue
-                    minima.append((i, j))
-    for i, j in minima:
-        plt.scatter(j, i, edgecolor="red", facecolor="none", s=100, linewidth=1.5)
-        plt.text(
-            j,
-            i + 0.25,
-            str(round(Es[i, j] * 1e4) / 1e4),
-            color="red",
-            horizontalalignment="center",
-            verticalalignment="baseline",
-        )
-    if len(minima) == 2:
-        yi, xi = minima[0]
-        yf, xf = minima[1]
-        data = lowest_peak_path(Es, xi, yi, xf, yf, allow_diag=True)
-        path = data["path"]
-        peak = data["peak"]
-        plt.plot([x for x, _ in path], [y for _, y in path], color="red")
-        for x, y in path:
-            if Es[y, x] == peak:
-                plt.scatter(
-                    x, y, edgecolor="red", facecolor="none", s=100, linewidth=1.5
-                )
-                plt.text(
-                    x,
-                    y + 0.25,
-                    str(round(Es[y, x] * 1e4) / 1e4),
-                    color="red",
-                    horizontalalignment="center",
-                    verticalalignment="baseline",
-                )
+                        minima.append((i, j))
+        for i, j in minima:
+            plt.scatter(j, i, edgecolor="red", facecolor="none", s=100, linewidth=1.5)
+            plt.text(
+                j,
+                i + 0.25,
+                str(round(Es[i, j] * 1e4) / 1e4),
+                color="red",
+                horizontalalignment="center",
+                verticalalignment="baseline",
+            )
+        if len(minima) == 2:
+            yi, xi = minima[0]
+            yf, xf = minima[1]
+            data = lowest_peak_path(Es, xi, yi, xf, yf, allow_diag=True)
+            path = data["path"]
+            peak = data["peak"]
+            plt.plot([x for x, _ in path], [y for _, y in path], color="red")
+            for x, y in path:
+                if Es[y, x] == peak:
+                    plt.scatter(
+                        x, y, edgecolor="red", facecolor="none", s=100, linewidth=1.5
+                    )
+                    plt.text(
+                        x,
+                        y + 0.25,
+                        str(round(Es[y, x] * 1e4) / 1e4),
+                        color="red",
+                        horizontalalignment="center",
+                        verticalalignment="baseline",
+                    )
 
     plt.title(title)
     plt.tight_layout()
